@@ -22,7 +22,7 @@ function CollegeCard({ colleges,isLoading }) {
 
                 {colleges && colleges.map((college,index)=> ( 
                 <Link to={`/colleges/${college?.id}`} key={index} className='w-full md:w-[48%] lg:w-full'>
-                    <div className="card flex flex-col lg:flex-row gap-6 rounded-xl shadow-sm shadow-slate-700 sm:px-7 sm:py-5 lg:p-2 items-center bg-[#6e48aa]">
+                    <div className="card flex flex-col lg:flex-row gap-6 rounded-xl shadow-sm shadow-slate-700 sm:px-7 sm:py-5 lg:p-2 items-center bg-[#2563ea]">
 
                         {/* COLLEGE-IMAGE */}
                         <div className="college-image flex-1">
@@ -36,7 +36,7 @@ function CollegeCard({ colleges,isLoading }) {
 
                                 <div className="collge-name">
                                     <div className="text-white font-semibold text-xl lg:text-2xl">{college?.college.college_name}</div>
-                                    <div className="text-base text-slate"><HiOutlineMap className='inline mr-1' /> {college?.college_address} </div>
+                                    <div className="text-base text-white text-slate"><HiOutlineMap className='inline mr-1' /> {college?.college_address} </div>
                                 </div>
 
                                 <div className="hidden lg:block text-slate text-xl cursor-pointer font-semibold p-2 rounded-full border-1 border-black hover:bg-slate-700 hover:text-white"><HiOutlineBookmark /></div>
@@ -52,7 +52,7 @@ function CollegeCard({ colleges,isLoading }) {
                                         <div className="flex flex-col gap-2">
                                             <li>
                                                 <h3 className='text-white text-sm leading-5 inline-block mx-3 lg:mx-0 lg:block'>Course Offered</h3>
-                                                <p className='text-lg text-blue-500 inline-block lg:block'>{college?.college_course_offered} Courses</p>
+                                                <p className='text-lg text-white inline-block lg:block'>{college?.college_course_offered} Courses</p>
                                             </li>
 
                                             <li className='hidden lg:block'>

@@ -12,9 +12,11 @@ import LoadingCard from "./components/Loading/Loader1";
 import Verify from "./pages/Register/Verify";
 import FloatLabels from "./components/FloatingLabels/FloatLabel";
 import Profile from "./pages/Register/Profile";
-import MyHome from "./pages/Homev1/MHome";
-import MyContact from "./pages/MContact/MyContact"; 
 import MLogin from "./pages/Mlogin/Login";
+import MyHome from "./pages/Homev1/MHome";
+import Contactv1 from "./pages/Contactv1/Contactv1";
+import SearchResult from "./pages/SearchResult/SearchResult";
+import SingleCollegev1 from "./pages/SingleCollegev1/SingleCollegev1";
 
 function App() {
 
@@ -26,17 +28,17 @@ function App() {
           <FloatLabels/> 
           <Routes>
                
-               {/* <Route path="/" element={<Home/>} /> */}
-               <Route path="/" element={<MyHome/>} />
+               <Route path="/" element={<Home/>} />
                <Route path='/colleges' element= {<College/>}/>
-               <Route path="/colleges/:id" element={<SingleCollege/>}/>
+               <Route path="/colleges/:id" element={<SingleCollegev1/>}/>
                <Route path='/login' element={user ? <Navigate to='/dashboard'/>:<MLogin/>} />
                <Route path="/register" element={user ? <Navigate to='/dashboard'/>:<Register/>} />
                <Route path="/complete-profile" element={<Profile />} />
                <Route path="/dashboard" element= {<Dashboard />}/>
                <Route path="/success" element={<Success />} />
                {/* <Route path="/contact" element={<LoadingCard/>} /> */}
-               <Route path="/contact" element={<MyContact />} />
+               <Route path="/search/:name" element={<SearchResult/>} />
+               <Route path="/contact" element={<Contactv1 />} />
                <Route path="/verify-email/:uid/:token" element={<Verify />} />
           </Routes>
           <Navbar/>

@@ -85,7 +85,7 @@ const AccordionMenu = forwardRef(function AccordionMenu(
       {items.map((item, index) => (
         <div key={index} className="accordion-item mt-4">
           <button
-            className="accordion-header font-semibold text-white text-lg flex justify-between w-full"
+            className="accordion-header font-semibold text-lg flex justify-between w-full"
             onClick={() => handleItemClick(index)}
           >
             <p>{item.title}</p>
@@ -99,7 +99,7 @@ const AccordionMenu = forwardRef(function AccordionMenu(
           >
             <div className="accordion-content">
               <form>
-                <ul className="text-white font-semibold text-[18px]">
+                <ul className=" font-semibold text-[18px]">
                   {item.menu.map((opt) => (
                     <li className="flex gap-3 ml-3 mt-4 items-center" key={opt}>
                       <input

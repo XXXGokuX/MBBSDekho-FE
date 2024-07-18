@@ -3,15 +3,17 @@ import Layout from "../../utils/Layout";
 import { HiOutlineCamera } from 'react-icons/hi'
 import { CgClose } from "react-icons/cg";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { GETAPI } from "../../API/api";
 
 function Dashboard() {
 
     const [showImage, setShowImage] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
-    const id = useSelector(({reducer}) => reducer.user);
-    const user = useSelector(({reducer}) => reducer.token);
+    const router= useNavigate()
+    const id = useSelector(({ reducer }) => reducer.user);
+    const user = useSelector(({ reducer }) => reducer.token);
+
 
 
     useEffect(() => {
@@ -36,147 +38,240 @@ function Dashboard() {
             <Layout>
 
 
-
-                <div className="dashboard bg-black/90 md:w-[80%] mx-auto px-3 md:px-6 py-7 text-white rounded">
-
-                    <h1 className="text-xl md:text-3xl font-bold">My Profile</h1>
-
-                    {/* <!-- Profile-Photo --> */}
-                    <div className="intro mt-14 border-b-[1px] pb-6 border-b-slate-500/40">
-
-                        <div className="profile-image flex gap-6 items-center">
-                            <img src={`${userInfo?.user_profile.user_profile_image}`}
-                                alt="profile"
-                                className="w-20 h-20 md:w-32 md:h-32 object-cover object-top rounded-full"
-                            />
-                            <div className="other-info">
-                                <h1 className="md:text-2xl font-semibold">{userInfo?.user.first_name} {userInfo?.user.last_name}</h1>
-                                <p className="text-slate-400 font-semibold md:text-lg"> <span className="text-sm md:text-lg mr-1">&#10148;</span>{userInfo?.user_profile.user_address
-                                }</p>
-
-                                <div className="edit text-slate-300 font-medium mt-2 border-[1px] inline-block px-4 py-1 rounded-2xl cursor-pointer hover:bg-white hover:text-black scale-100 active:scale-90 transition-all select-none">
-                                    Edit &#9998;
+                <div class="w-full max-w-3xl mx-auto p-6 md:p-8 lg:p-10">
+                    <div class="grid gap-8">
+                        <div class="grid gap-4">
+                            <div class="flex items-center justify-between">
+                                <h1 class="text-2xl font-bold">Personal Profile</h1>
+                                <button onClick={() => {
+                                    localStorage.clear()
+                                    window.location.reload()
+                                }} class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-[#e4e4e3] hover:text-accent-foreground h-9 rounded-md px-3">
+                                    Logout
+                                </button>
+                            </div>
+                            <div data-orientation="horizontal" role="none" class="shrink-0 bg-[#e4e4e5] h-[1px] w-full"></div>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="name"
+                                    >
+                                        Name
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="name"
+                                        disabled=""
+                                        value={`${userInfo?.user.first_name} ${userInfo?.user.last_name}`}
+                                    />
+                                </div>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="email"
+                                    >
+                                        Email
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="email"
+                                        disabled=""
+                                        value={`${userInfo?.user.email}`}
+                                    />
+                                </div>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="phone"
+                                    >
+                                        Phone
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="phone"
+                                        disabled=""
+                                        value={`${userInfo?.user_profile.user_phone}`}
+                                    />
+                                </div>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="father-name"
+                                    >
+                                        Father's Name
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="father-name"
+                                        disabled=""
+                                        value={`${userInfo?.user_profile.user_father_name}`}
+                                    />
+                                </div>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="education-budget"
+                                    >
+                                        Education Budget
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="education-budget"
+                                        disabled=""
+                                        value={`${userInfo?.user_profile.user_budget}`}
+                                    />
                                 </div>
                             </div>
-
                         </div>
-
-                    </div>
-
-                    {/* <!-- Personal-Information --> */}
-                    <div className="personal-info mt-7  border-b-[1px] pb-6 border-b-slate-500/40">
-
-                        <h1 className="text-xl md:text-3xl font-medium">Personal Information</h1>
-
-                        <div className="all-info-grid grid sm:grid-cols-2 grid-cols-1 mt-4 gap-y-3 md:gap-y-7">
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">First Name</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user.first_name}</p>
+                        <div class="grid gap-4">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-bold">Test Information</h2>
+                                {/* <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                    View Marksheet
+                                </button> */}
                             </div>
+                            <div data-orientation="horizontal" role="none" class="shrink-0 bg-[#e4e4e5] h-[1px] w-full"></div>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="test-score"
+                                    >
+                                        Test Score
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="test-score"
+                                        disabled=""
+                                        value={`${userInfo?.user_test_info.user_test_score}`}
+                                    />
+                                </div>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="test-date"
+                                    >
+                                        Test Date
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="test-date"
+                                        disabled=""
+                                        value={`${userInfo?.user_test_info.user_test_date}`}
+                                    />
+                                </div>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="test-expiry"
+                                    >
+                                        Test Expiry
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="test-expiry"
+                                        disabled=""
+                                        value={`${userInfo?.user_test_info.user_test_exp_date}`}
+                                    />
+                                </div>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="test-type"
+                                    >
+                                        Test Type
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="test-type"
+                                        disabled=""
+                                        value="NEET"
+                                    />
+                                </div>
 
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Last Name</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user.last_name}</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Email address</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user.email}</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Phone</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user_profile.user_phone}</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Father Name</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user_profile.user_father_name}</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Budget</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user_profile.user_budget} Lakh</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Selected College</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user_profile.user_college_preference}</p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    {/* <!-- Test-Info --> */}
-                    <div className="Test-info mt-7">
-
-                        <h1 className="text-xl md:text-3xl font-medium">Test Info</h1>
-
-                        <div className="all-info-grid grid sm:grid-cols-2 grid-cols-1 mt-4 gap-y-3 md:gap-y-7">
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Test Score</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user_test_info.user_test_score}</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Test Date</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user_test_info.user_test_date}</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Test Expiry Date</p>
-                                <p className="text-lg tracking-widest">{userInfo?.user_test_info.user_test_exp_date}</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Test Type</p>
-                                <p className="text-lg tracking-widest">NEET</p>
-                            </div>
-
-                            <div className="first">
-                                <p className="text-slate-400 tracking-wide font-medium">Test Image</p>
-                                <div onClick={() => setShowImage(true)}
-                                      style={{ backgroundImage: `url(${userInfo?.user_test_info.user_test_document_image})` }}    
-                                    className="w-28 h-20 md:w-36 md:h-24 border-2 md:z-10 border-slate-500/30 mt-2 cursor-pointer bg-cover bg-center bg-no-repeat relative group" >
-
-                                    <span className="absolute flex justify-center items-center w-full h-full group-hover:bg-slate-500/80 top-0 left-0">
-                                        <HiOutlineCamera className="text-white text-xl md:text-2xl" />
-                                    </span>
+                                <div class="grid gap-2">
+                                    <label
+                                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        for="test-type"
+                                    >
+                                        College Preference
+                                    </label>
+                                    <input
+                                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        id="test-type"
+                                        disabled=""
+                                        value={`${userInfo?.user_profile.user_college_preference}`}
+                                    />
                                 </div>
                             </div>
-
-                            {showImage &&
-                                <div className="youtube-video-player fixed top-0 left-0 z-20 w-screen h-screen bg-black/80 flex items-center">
-
-                                    <div className="h-[80%] w-[95%]  md:w-[90%] mx-auto md:px-0">
-
-                                        <div className="close-icon fixed right-4 md:right-7 top-6" onClick={() => setShowImage(false)}>
-                                            <CgClose className="text-white/80 transition-all hover:scale-125 hover:text-white cursor-pointer text-right text-xl" />
-                                        </div>
-
-                                        <div className="flex items-center justify-center h-full md:w-auto ">
-
-                                            <img className="w-full h-[65%] md:h-full object-contain" src={`${userInfo.user_test_info.user_test_document_image}`} alt="score-card" />
-
-                                        </div>
+                        </div>
+                        <div class="grid gap-4">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-bold">Documents</h2>
+                                {/* <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                                    Upload Document
+                                </button> */}
+                            </div>
+                            <div data-orientation="horizontal" role="none" class="shrink-0 bg-border h-[1px] w-full"></div>
+                            <div class="grid gap-4">
+                                <div class="flex items-center gap-4 bg-[#f4f4f4] p-4 rounded-lg">
+                                    <div class="flex-shrink-0">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="h-8 w-8 text-muted-foreground"
+                                        >
+                                            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                            <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">{userInfo && new URL(userInfo?.user_test_info.user_test_document_image).pathname.split("/").pop()}</div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <a href={userInfo?.user_test_info.user_test_document_image} download={userInfo && new URL(userInfo?.user_test_info.user_test_document_image).pathname.split("/").pop()}>
+                                            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="h-4 w-4"
+                                                >
+                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                                                </svg>
+                                                <span class="sr-only">Download</span>
+                                            </button>
+                                        </a>
 
                                     </div>
-
                                 </div>
-                            }
 
-
-
+                            </div>
                         </div>
 
                     </div>
                 </div>
 
 
-            </Layout>
+
+
+            </Layout >
 
 
         </>
