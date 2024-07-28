@@ -6,10 +6,11 @@ export default function SearchResult() {
 
     const [colleges, setColleges] = useState([]);
     const [loading, setLoading] = useState(false)
-    const [value, serchValue] = useState("")
+    const { name } = useParams()
+    const [value, serchValue] = useState(name)
     const router= useNavigate()
 
-    const { name } = useParams()
+    
     
    
 

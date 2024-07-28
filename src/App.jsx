@@ -17,6 +17,9 @@ import MyHome from "./pages/Homev1/MHome";
 import Contactv1 from "./pages/Contactv1/Contactv1";
 import SearchResult from "./pages/SearchResult/SearchResult";
 import SingleCollegev1 from "./pages/SingleCollegev1/SingleCollegev1";
+import VendorRegister from "./pages/Register/VendorRegister";
+import VendorLogin from "./pages/Mlogin/VendorLogin";
+import SearchCountryResult from "./pages/SearchResult/SearchCountryResult";
 
 function App() {
 
@@ -32,12 +35,18 @@ function App() {
                <Route path='/colleges' element= {<College/>}/>
                <Route path="/colleges/:id" element={<SingleCollegev1/>}/>
                <Route path='/login' element={user ? <Navigate to='/dashboard'/>:<MLogin/>} />
+               <Route path='/login/vendor' element={user ? <Navigate to='/dashboard'/>:<VendorLogin/>} />
+
                <Route path="/register" element={user ? <Navigate to='/dashboard'/>:<Register/>} />
+               <Route path="/register/vendor" element={user ? <Navigate to='/dashboard'/>:<VendorRegister/>} />
+
                <Route path="/complete-profile" element={<Profile />} />
                <Route path="/dashboard" element= {<Dashboard />}/>
                <Route path="/success" element={<Success />} />
                {/* <Route path="/contact" element={<LoadingCard/>} /> */}
                <Route path="/search/:name" element={<SearchResult/>} />
+               <Route path="/search/country/:name" element={<SearchCountryResult/>} />
+
                <Route path="/contact" element={<Contactv1 />} />
                <Route path="/verify-email/:uid/:token" element={<Verify />} />
           </Routes>
